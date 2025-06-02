@@ -57,5 +57,49 @@ int main()
         printf( " 0 - Sair \n");
         printf( " Digite sua escolha:  ");
         scanf( "%d" , &option );
+
+
+        if( option == 1 ){
+            printf( " Digite a origem do novo voo:  ");
+            scanf( " %[^\n]" , &origem );
+
+            printf( " Digite o destino do novo voo:  ");
+            scanf( " %[^\n]" , &destino );
+
+            printf( " Digite o numero do novo voo:  ");
+            scanf( " %[^\n]" , &numero );
+
+            printf( " Digite a data do novo voo (YYYY-MM-DD):  ");
+            scanf( " %[^\n]" , &data );
+
+            printf( " Digite a hora do novo voo (HH:MM):  ");
+            scanf( " %[^\n]" , &hora );
+
+            printf( " Digite a companhia do novo voo:  ");
+            scanf( " %[^\n]" , &companhia );
+
+            printf( " Digite o tipo do novo voo (Econômico/Primeira Classe):  ");
+            scanf( " %[^\n]" , &tipo );
+
+            printf( " Digite o status do novo voo (Aguardando Embarque/Atrasado/Cancelado):  ");
+            scanf( " %[^\n]" , &status );
+
+            Flight* newFlight = generateAddress(origem, destino, numero, data, hora, companhia, tipo, status);
+
+            if (newFlight != NULL)  {
+                if (start == NULL) {
+                    start = newFlight;
+                    end = newFlight;
+                }   else {
+                    // Os voos devem ser ordenados por hora, de modo que os voos mais cedo venham primeiro e os mais tarde venham por último.
+                    if (strcomp(hora, start->hora) < 0) {
+                        // Colocando o voo no Início da lista
+                        newFlight->next = start;
+                        start->previous = newFlight;
+                        start = newFlight;
+                    }
+                }
+            }
+        }
     }
 }
